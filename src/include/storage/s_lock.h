@@ -359,9 +359,9 @@ spin_delay(void)
 
 
 /*
- * RISC-V likewise uses __sync_lock_test_and_set(int *, int) if available.
+ * LoongArch and RISC-V likewise uses __sync_lock_test_and_set(int *, int) if available.
  */
-#if defined(__riscv)
+#if defined(__loongarch__) || defined(__riscv)
 #ifdef HAVE_GCC__SYNC_INT32_TAS
 #define HAS_TEST_AND_SET
 
@@ -378,7 +378,7 @@ tas(volatile slock_t *lock)
 #define S_UNLOCK(lock) __sync_lock_release(lock)
 
 #endif	 /* HAVE_GCC__SYNC_INT32_TAS */
-#endif	 /* __riscv */
+#endif	 /* __loongarch__ || __riscv */
 
 
 /* S/390 and S/390x Linux (32- and 64-bit zSeries) */
